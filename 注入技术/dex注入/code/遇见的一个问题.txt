@@ -1,0 +1,5 @@
+问题：
+在注入的程序中，可以通过android::AndroidRuntime::getJavaVM();获取JavaVM，然后获取JNI_ENV
+JNI可以findClass，getMethodID，但是不能调用java函数
+解决办法：
+https://groups.google.com/forum/#!topic/google-breakpad-dev/R-vS6j0W-o0

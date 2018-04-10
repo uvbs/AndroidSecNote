@@ -1,0 +1,258 @@
+首先在soInit下断点，一路跟踪到
+
+sub_4214: 获取sdk版本号 SDK_INIT
+
+sub_6DD8: 获取app信息，sourceDir， processName等
+
+sub_6BC2: 获取libdemolishdata.so 路径。
+
+70A6: open("/data/app-lib/com.example.helloworld/libdemolishdata.so")
+
+6EEE: stat("/data/app-lib/com.example.helloworld/libdemolishdata.so")
+
+7102: mmap(0, 0xc0, 0x7, 0x2, fp, 0)
+
+//读取libdemolishdata末尾
+sub_46E0(int *base, int num, int size) 
+{
+    int * buffer = malloc( 16 * num);
+    int *begin = base + size - 4 - 12 * num,;
+    for (int i = 0; i < num;  i++) {
+        memcpy(buffer,  begin, 12);
+        *(buffer + 3) = 0;
+        buffer += 16;
+        begin += 12;
+    }
+}
+
+//读取libdemolishdata开头部分
+sub_477c(int *base, int num)
+{
+    int *buffer = malloc(16 *num);
+    int result = 0;
+    for (int i =0, i < num; i++) {
+        buffer[0] = base[1];
+        buffer[1] = base[2]:
+        buffer[2] = base[3] * 16;
+        buffer[3] = result;        
+        base += base[2] / 4;
+        result += base[2];     
+     }
+}
+
+//sub_4812
+sub_4812() 
+{
+    //读取libdemolishdata.so 中的函数部分到内存
+}
+
+内存结构：
+0x7054: function struct
+0x7058: header
+0x705c: tail
+0x7060: 3 (number of function)
+0x7064: 0x30(length of function struct)
+
+sub_883E
+sub_883E(int *result, int a2, int a3)
+貌似是对function_section那一节进行排序
+
+sub_4298
+unsigned int __fastcall sub_4298(_JNIEnv *a1)
+//判断是否为yun_os
+
+sub_4A14(JNIEnv *a1)
+//判断系统为dalvik or art, dalvik 返回为1
+
+341C： log("Ali", "sdk version dalvik yunos ")
+
+5858：memset
+
+8930：sub_8930(char *result, int a2, char a3) 字符串替换函数
+将 / 替换为 @
+
+598c：strlen("@data@app@com.example.helloworld-1.apk")
+
+sub_8998(char *a1, char *a2, unsigned int a3, unsigned int a4) 
+字符串变化， 具体未分析
+
+5920： strcat(" data@app@com.example.helloworld-1.apk", "@classes.dex ");
+
+56E0： getpid()
+
+58B6: snprintf("/proc/%d/maps.r.open %s error! f")
+
+59f8: fopen("/proc/%d/maps")
+
+5b50: fgets(buffer)
+
+5AF8: strstr(buffer, "apk@classes.dex")
+
+5AE8: sscanf(" /data/dalvik-cache/data@app@com.example.helloworld-1.apk@classes.dex", "%x-%x", buffer)
+获取了 classes.dex 在内存的起始地址 以及 终止地址
+
+sub_5506(char *begin, char *end, int a3)
+通过dex文件的checksum, signature 来确定上一步读取的dex文件是否正确，并将classes.dex在内存的地址保存到checksum，signature，后面。 格式为：
+
+dex文件编号
+checksum
+signature
+dex文件在内存的地址
+
+2CEC： fclose
+
+3570： clock
+
+3468： log("ALi", "init success")
+
+fixFunc
+
+37FC : call dvm.so : 3EE90
+
+38D2 : call dvm.so : 3F650
+
+
+sub_7280 : getDatarefsByHashcode
+
+
+int * sub_72C6(int [] a {3, 4, 5},  int length = 3)
+主要是调用sub_877E来查找fixFunc所调用的序号，在之前读取的函数段中的标号
+03， 04， 05 对应 
+二分查找
+sub_877E(int *base, int length, int value)
+
+
+
+sub_7354（int [] a {3, 4, 5}, int length = 3）
+啥都没干，看看数组里有几个非零的数？
+
+5588 getDexHeaderInDalvik(unsigned int) 返回dexheader 起始地址
+
+38AA： call dvm.so 3E950  release int array
+
+
+sub_822c
+
+doFixThisClass
+
+8678：BL              memset
+
+867C：MOVS            R0, R6
+
+867E：MOVS            R1, R4
+
+8680：MOVS            R2, #0x70
+
+8682：BL              memcpy； 将内存中的dexHeader读取出来
+
+83A8： LDR             R3, [R6,#0x3C];  读取string_ids_offset
+
+85F0：ADDS R3, R4, R3； 得到string_ids表在内存中的起始位置 
+
+85F4 ：LDR             R3, [R6,#0x44]； 读取type_ids_offset
+
+85F6：ADDS            R3, R4, R3； 得到type_ids表在内存中的起始位置
+
+8608： LDR             R3, [R6,#0x5C]；得到method_ids_offset
+
+860A： ADDS            R3, R4, R3；得到method_ids表在内存中的起始地址
+
+835C：LDR             R3, [R6,#0x4C]； 得到proto_ids_offset
+
+861C：ADDS            R3, R4, R3；得到proto_ids表在内存中的起始地址
+
+8634： CMP             R3, R2 ； while（times < 3）
+
+8404： LDR             R3, [R7]
+
+8406：LDR             R1, [SP,#0x1C]
+
+8408：729E1408 LSLS            R5, R5, #4
+
+840A：ADDS            R3, R3, R5；    读取加密函数的method_id
+
+841E：LSLS            R2, R6, #3
+
+8420：ADDS            R2, R1, R2； 计算该函数的DexMethodID结构体在内存的地址
+
+83B8：LDRH            R1, [R2]； 读取该函数所在类的classIdx
+
+8448：LDRH            R2, [R2,#2]； 读取该函数protoIdx
+
+73F2：LDR             R2, [R3]； 获取指向libdemolishData.so header指针
+
+sub_73EA：读取header 的第一位，是否为一个dex？
+
+8438 ： LDR             R3, [R5,#0xC]； 读取加密函数的codeoff 相对于 libdemolishData.so
+
+84E4：ADDS            R3, R2, R3； 计算加密函数真正的codeoff， 上一步的codeoff + libdemolishdata.so的基址
+
+sub_743c(int *dex， int* string_ids, int *type_ids, int typeid);
+getClsnameByclsref
+
+7578：LSLS            R3, R3, #2
+
+757A：LDR             R3, [R3,R2]； 得到typeid
+
+7510：LDR             R3, [R3,R1]
+
+7512：ADDS            R4, R0, R3； 得到类名
+
+7514：LDRB            R3, [R4]； 得到类名长度
+
+74DC：strlen(Lcom/example/helloworld/MainActivity;)
+
+752C：void *calloc(0x27, 1); 类名+2
+
+753E：strcpy(buffer, "Lcom/example/helloworld/MainActivity;")
+
+84CC：MOVS            R3, R6； R6=13BF
+
+84D2：LDR             R2, [SP,#0x1C]； 获取method_ids列表在内存的位置
+
+75F6：LSLS            R3, R3, #3
+
+75F8：ADDS            R3, R2, R3； 计算密函数的DexMethodID结构体在内存的地址
+
+75FA：LDR             R3, [R3,#4]； 读取该函数nameIdx
+
+767C：LSLS            R3, R3, #2
+
+767E：LDR             R4, [R3,R1]
+
+7680：ADDS            R4, R0, R4；读取该函数名地址
+
+7630：SUBS            R3, R4, #1
+
+7632：LDRB            R3, [R3]；获取函数名的长度
+
+7668：strlen("")；计算函数名长度
+
+760A：caloc()； 为函数名分配内存
+
+7658：memcpy；拷贝函数名到内存
+
+//获取函数参数列表
+sub_76CA(int *dex_start, int *DexProtoID, int protoids)
+76CA：MOVS            R3, #0xC
+76CC：PUSH            {R4,LR}
+76CE：MULS            R2, R3
+76D0：ADDS            R1, R1, R2 获取函数所对应DexProtoID结构在内存的地址
+
+76D2：LDR             R3, [R1,#8]；获取函数参数所对应DexTypeList的offset
+76D4：MOVS            R4, R0  
+76D6：SUBS            R0, R3, #0
+76D8：BEQ             locret_72B926DE
+76DA：LSLS            R3, R3, #3
+76DC：ADDS            R0, R4, R3 ；获取函数参数所对应DexTypeList在内存的地址
+76DE
+76DE：locret_72B926DE                         ;
+76DE：POP             {R4,PC}
+
+
+处理函数参数
+sub_7704(int *dex_start, int *DexProtoID, int protoids)
+参数1：dex在内存中的起始地址
+参数2：DexProtoId段 在内存中的起始地址
+参数3：protoids，DexProtoId列表的索引
+
