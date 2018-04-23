@@ -44,5 +44,3 @@ Zygote进程可以孵化出三种进程：
 3. dvmInitAfterZygote 初始化拷贝自Zygote的虚拟机实例
 
 因为虚拟机进程为Zygote进程fork出来的子进程，所以虚拟机进程在创建之初就可以和Zygote进程共享很多Java和Android核心类库（dex文件）及其JNI方法（so文件），只需在必要时(copy on write), 复制出自己的一份。
-
-## 虚拟机实例执行应用程序
