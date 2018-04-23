@@ -6,7 +6,7 @@ android安全学习笔记整理，目录如下：
     - oat
     - davik虚拟机启动分析
     - dalvik字节码
-    - Dalvik解释器源码到VMP分析
+    - [Dalvik解释器源码到VMP分析](https://github.com/BATTZION/AndroidSecNote/blob/master/android%E5%9F%BA%E7%A1%80/Dalvik%E8%A7%A3%E9%87%8A%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%B0vmp.md)
 - 注入
     - [so注入](https://github.com/BATTZION/AndroidSecNote/tree/master/%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF/so%E6%B3%A8%E5%85%A5)
     - [Dex注入](https://github.com/BATTZION/AndroidSecNote/tree/master/%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF/dex%E6%B3%A8%E5%85%A5)
