@@ -1,0 +1,192 @@
+MAGIC:
+oat
+064
+
+CHECKSUM:
+0x7374883b
+
+INSTRUCTION SET:
+Arm
+
+INSTRUCTION SET FEATURES:
+smp,-div,-atomic_ldrd_strd
+
+DEX FILE COUNT:
+1
+
+EXECUTABLE OFFSET:
+0x00001000
+
+INTERPRETER TO INTERPRETER BRIDGE OFFSET:
+0x00000000
+
+INTERPRETER TO COMPILED CODE BRIDGE OFFSET:
+0x00000000
+
+JNI DLSYM LOOKUP OFFSET:
+0x00000000
+
+QUICK GENERIC JNI TRAMPOLINE OFFSET:
+0x00000000
+
+QUICK IMT CONFLICT TRAMPOLINE OFFSET:
+0x00000000
+
+QUICK RESOLUTION TRAMPOLINE OFFSET:
+0x00000000
+
+QUICK TO INTERPRETER BRIDGE OFFSET:
+0x00000000
+
+IMAGE PATCH DELTA:
+10809344 (0x00a4f000)
+
+IMAGE FILE LOCATION OAT CHECKSUM:
+0x649faede
+
+IMAGE FILE LOCATION OAT BEGIN:
+0x71429000
+
+KEY VALUE STORE:
+classpath = 
+debuggable = false
+dex2oat-cmdline = --dex-file=/sdcard/demo.dex --oat-file=/sdcard/demo.oat
+dex2oat-host = Arm
+image-location = /data/dalvik-cache/arm/system@framework@boot.art
+pic = true
+
+SIZE:
+4280
+
+OatDexFile:
+location: /sdcard/demo.dex
+checksum: 0xacaf5f4c
+0: Lcom/example/MainClass; (offset=0x00000454) (type_idx=1) (StatusInitialized) (OatClassAllCompiled)
+  0: void com.example.MainClass.<init>() (dex_method_idx=0)
+    DEX CODE:
+      0x0000: 7010 0400 0000           	| invoke-direct {v0}, void java.lang.Object.<init>() // method@4
+      0x0003: 0e00                     	| return-void
+    OatMethodOffsets (offset=0x00000458)
+      code_offset: 0x0000101d 
+      gc_map: (offset=0x00000000)
+    OatQuickMethodHeader (offset=0x00001000)
+      mapping_table: (offset=0x00000000)
+      vmap_table: (offset=0x0000046c)
+        Optimized CodeInfo (size=18, number_of_dex_registers=1, number_of_stack_maps=0, has_inline_info=0, number_of_bytes_for_inline_info=0, number_of_bytes_for_dex_register_map=1, number_of_bytes_for_dex_pc=0, number_of_bytes_for_native_pc=0, number_of_bytes_for_register_mask=0)
+        DexRegisterLocationCatalog (number_of_entries=0, size_in_bytes=0)
+    QuickMethodFrameInfo
+      frame_size_in_bytes: 0
+      core_spill_mask: 0x00008020 (r5, r15)
+      fp_spill_mask: 0x00000000 
+      vr_stack_locations:
+      	ins: v0[sp + #4]
+      	method*: v1[sp + #0]
+      	outs: v0[sp + #4]
+    CODE: (code_offset=0x0000101d size_offset=0x00001018 size=2)...
+      0x0000101c: 4770    	bx      lr
+  1: void com.example.MainClass.main(java.lang.String[]) (dex_method_idx=1)
+    DEX CODE:
+      0x0000: 1210                     	| const/4 v0, #+1
+      0x0001: 1221                     	| const/4 v1, #+2
+      0x0002: 7120 0300 1000           	| invoke-static {v0, v1}, int com.example.TestClass.testMethod(int, int) // method@3
+      0x0005: 0e00                     	| return-void
+    OatMethodOffsets (offset=0x0000045c)
+      code_offset: 0x0000103d 
+      gc_map: (offset=0x00000000)
+    OatQuickMethodHeader (offset=0x00001020)
+      mapping_table: (offset=0x00000000)
+      vmap_table: (offset=0x0000047e)
+        Optimized CodeInfo (size=32, number_of_dex_registers=3, number_of_stack_maps=3, has_inline_info=0, number_of_bytes_for_inline_info=0, number_of_bytes_for_dex_register_map=1, number_of_bytes_for_dex_pc=1, number_of_bytes_for_native_pc=1, number_of_bytes_for_register_mask=0)
+        DexRegisterLocationCatalog (number_of_entries=1, size_in_bytes=1)
+            entry 0: in stack (12)
+          StackMap 0 (dex_pc=0x0, native_pc_offset=0x8, dex_register_map_offset=0xffffffff, inline_info_offset=0xffffffff, register_mask=0x0, stack_mask=0b00000000)
+          StackMap 1 (dex_pc=0x0, native_pc_offset=0x42, dex_register_map_offset=0x0, inline_info_offset=0xffffffff, register_mask=0x0, stack_mask=0b00001000)
+            v2: in stack (12)	[entry 0]
+          StackMap 2 (dex_pc=0x2, native_pc_offset=0x52, dex_register_map_offset=0x0, inline_info_offset=0xffffffff, register_mask=0x0, stack_mask=0b00001000)
+            v2: in stack (12)	[entry 0]
+    QuickMethodFrameInfo
+      frame_size_in_bytes: 32
+      core_spill_mask: 0x00008020 (r5, r15)
+      fp_spill_mask: 0x00000000 
+      vr_stack_locations:
+      	locals: v0[sp + #12] v1[sp + #16]
+      	ins: v2[sp + #36]
+      	method*: v3[sp + #0]
+      	outs: v0[sp + #4] v1[sp + #8]
+    CODE: (code_offset=0x0000103d size_offset=0x00001038 size=88)...
+      0x0000103c: f5ad5c00	sub     r12, sp, #8192
+      0x00001040: f8dcc000	ldr.w   r12, [r12, #0]
+      0x00001044: b520    	push    {r5, lr}
+      0x00001046: b086    	sub     sp, sp, #24
+      0x00001048: 9000    	str     r0, [sp, #0]
+      0x0000104a: f8b9c000	ldrh.w  r12, [r9, #0]  ; state_and_flags
+      0x0000104e: f1bc0f00	cmp.w   r12, #0
+      0x00001052: f0408010	bne.w   +32 (0x00001076)
+      0x00001056: 9800    	ldr     r0, [sp, #0]
+      0x00001058: 6880    	ldr     r0, [r0, #8]
+      0x0000105a: 6940    	ldr     r0, [r0, #20]
+      0x0000105c: 2800    	cmp     r0, #0
+      0x0000105e: f0008011	beq.w   +34 (0x00001084)
+      0x00001062: f8d0c084	ldr.w   r12, [r0, #132]
+      0x00001066: f1bc0f0a	cmp.w   r12, #10
+      0x0000106a: f2c0800b	blt.w   +22 (0x00001084)
+      0x0000106e: f3bf8f5b	dmb     ish
+      0x00001072: b006    	add     sp, sp, #24
+      0x00001074: bd20    	pop     {r5, pc}
+      0x00001076: 9103    	str     r1, [sp, #12]
+      0x00001078: f8d9e25c	ldr.w   lr, [r9, #604]  ; pTestSuspend
+      0x0000107c: 47f0    	blx     lr
+      0x0000107e: 9903    	ldr     r1, [sp, #12]
+      0x00001080: f7ffbfe9	b.w     -46 (0x00001056)
+      0x00001084: 9103    	str     r1, [sp, #12]
+      0x00001086: 2002    	movs    r0, #2
+      0x00001088: f8d9e140	ldr.w   lr, [r9, #320]  ; pInitializeStaticStorage
+      0x0000108c: 47f0    	blx     lr
+      0x0000108e: 9903    	ldr     r1, [sp, #12]
+      0x00001090: f7ffbfef	b.w     -34 (0x00001072)
+1: Lcom/example/TestClass; (offset=0x00000460) (type_idx=2) (StatusInitialized) (OatClassAllCompiled)
+  0: void com.example.TestClass.<init>() (dex_method_idx=2)
+    DEX CODE:
+      0x0000: 7010 0400 0000           	| invoke-direct {v0}, void java.lang.Object.<init>() // method@4
+      0x0003: 0e00                     	| return-void
+    OatMethodOffsets (offset=0x00000464)
+      code_offset: 0x0000101d 
+      gc_map: (offset=0x00000000)
+    OatQuickMethodHeader (offset=0x00001000)
+      mapping_table: (offset=0x00000000)
+      vmap_table: (offset=0x0000046c)
+        Optimized CodeInfo (size=18, number_of_dex_registers=1, number_of_stack_maps=0, has_inline_info=0, number_of_bytes_for_inline_info=0, number_of_bytes_for_dex_register_map=1, number_of_bytes_for_dex_pc=0, number_of_bytes_for_native_pc=0, number_of_bytes_for_register_mask=0)
+        DexRegisterLocationCatalog (number_of_entries=0, size_in_bytes=0)
+    QuickMethodFrameInfo
+      frame_size_in_bytes: 0
+      core_spill_mask: 0x00008020 (r5, r15)
+      fp_spill_mask: 0x00000000 
+      vr_stack_locations:
+      	ins: v0[sp + #4]
+      	method*: v1[sp + #0]
+      	outs: v0[sp + #4]
+    CODE: (code_offset=0x0000101d size_offset=0x00001018 size=2)...
+      0x0000101c: 4770    	bx      lr
+  1: int com.example.TestClass.testMethod(int, int) (dex_method_idx=3)
+    DEX CODE:
+      0x0000: 9000 0102                	| add-int v0, v1, v2
+      0x0002: 0f00                     	| return v0
+    OatMethodOffsets (offset=0x00000468)
+      code_offset: 0x000010b5 
+      gc_map: (offset=0x00000000)
+    OatQuickMethodHeader (offset=0x00001098)
+      mapping_table: (offset=0x00000000)
+      vmap_table: (offset=0x0000046c)
+        Optimized CodeInfo (size=18, number_of_dex_registers=3, number_of_stack_maps=0, has_inline_info=0, number_of_bytes_for_inline_info=0, number_of_bytes_for_dex_register_map=1, number_of_bytes_for_dex_pc=0, number_of_bytes_for_native_pc=0, number_of_bytes_for_register_mask=0)
+        DexRegisterLocationCatalog (number_of_entries=0, size_in_bytes=0)
+    QuickMethodFrameInfo
+      frame_size_in_bytes: 0
+      core_spill_mask: 0x00008020 (r5, r15)
+      fp_spill_mask: 0x00000000 
+      vr_stack_locations:
+      	locals: v0[sp + #4294967280]
+      	ins: v1[sp + #4] v2[sp + #8]
+      	method*: v3[sp + #0]
+    CODE: (code_offset=0x000010b5 size_offset=0x000010b0 size=4)...
+      0x000010b4: 1888    	adds    r0, r1, r2
+      0x000010b6: 4770    	bx      lr

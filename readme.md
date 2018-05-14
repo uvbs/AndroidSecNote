@@ -2,7 +2,7 @@ android安全学习笔记整理，目录如下：
 
 - android基础
     - [android classloader](https://github.com/BATTZION/AndroidSecNote/blob/master/android%E5%9F%BA%E7%A1%80/classloader.md)
-    - odex
+    - [art模式下的动态加载](https://github.com/BATTZION/AndroidSecNote/blob/master/android%E5%9F%BA%E7%A1%80/ART%E6%A8%A1%E5%BC%8F%E4%B8%8BDex%E5%8A%A0%E8%BD%BD.md)
     - oat
     - davik虚拟机启动分析
     - dalvik字节码
@@ -14,6 +14,7 @@ android安全学习笔记整理，目录如下：
     - so hook
     - java hook
     - hook框架
+- 源码阅读
 - 反调试
 - 脱壳实战
     - [ali脱壳](https://github.com/BATTZION/AndroidSecNote/tree/master/%E8%84%B1%E5%A3%B3/ali%E5%A3%B3%E5%AD%90)
