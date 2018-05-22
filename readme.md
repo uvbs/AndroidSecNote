@@ -11,8 +11,8 @@ android安全学习笔记整理，目录如下：
     - [so注入](https://github.com/BATTZION/AndroidSecNote/tree/master/%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF/so%E6%B3%A8%E5%85%A5)
     - [Dex注入](https://github.com/BATTZION/AndroidSecNote/tree/master/%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF/dex%E6%B3%A8%E5%85%A5)
 - hook
-    - [so hook]()
-    - java hook
+    - [so hook](https://github.com/BATTZION/AndroidSecNote/tree/master/Hook%E6%8A%80%E6%9C%AF/So%20Hook)
+    - [java hook](https://github.com/BATTZION/AndroidSecNote/tree/master/Hook%E6%8A%80%E6%9C%AF/Java%20Hook)
     - hook框架
 - 源码阅读
 - 反调试
